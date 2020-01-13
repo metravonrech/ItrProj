@@ -1,0 +1,123 @@
+<br>
+<h1 class="text-center">{{companyDetails?.name}}</h1>
+<br>
+<mdb-carousel [animation]="'slide'">
+  <mdb-carousel-item class="cl-custom-class justify-content-center " *ngFor="let photo of companyDetails?.files">
+    <cl-image public-id={{photo}}>
+      <cl-transformation height="600" width="700" crop="fill"></cl-transformation>
+    </cl-image>
+  </mdb-carousel-item>
+</mdb-carousel>
+<br>
+<br>
+
+<app-star-rating
+  [changable]="true"
+  [currentRate]="summaryRate"
+></app-star-rating>
+
+
+<div class="text-center ">
+<button type="button" class="btn btn-primary pr-5 pl-5" (click)=rateProject() data-toggle="modal" data-target="#rateModal">
+    Rate this project
+</button>
+</div>
+<!-- Modal -->
+<div class="modal fade" id="rateModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Rate us</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+          <app-star-rating
+            [changable]="false"
+
+            (currentRateChange)="changeRate($event)"
+          ></app-star-rating>
+      </div>
+      <div class="alert alert-success text-center" *ngIf="ratingMessage">
+        {{ratingMessage}}
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<br>
+<h2 class="text-center">The Terminal Date</h2>
+<p class="text-center">{{companyDetails?.terminalDate | date:'medium' }}</p>
+<h3 class="text-center">About Us</h3>
+<p>{{companyDetails?.description}}</p>
+<br>
+<div class="text-center" *ngIf="companyDetails?.youTubeLink">
+  <app-youtoube
+    [id]="companyDetails?.youTubeLink"
+  >
+    
+  </app-youtoube>
+</div>
+
+<br>
+<h3 class="text-center">The sum needed</h3>
+
+<h4 class="text-center">{{companyDetails?.sum}}
+  <img style="padding-bottom: 3px" height="23" width="23" src="../../../assets/img/dollar-sign-solid.svg"/>
+</h4>
+<div class="progress">
+    <div [ngStyle]="{'width': currentSum + '% '}" class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar" aria-valuemin="0" aria-valuemax="100" ></div>
+</div>
+
+
+<button type="button" class="btn btn-primary m-4 float-right" data-toggle="modal" data-target="#exampleModal">
+  Back this project
+</button>
+
+<!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Support this project</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        
+        <form >
+          <div class="form-group">
+            <label for="pay-system" class="col-form-label">Pledge amount</label>
+            <input [ngModelOptions]="{standalone: true}" [(ngModel)]="addSum" [pattern]="regexp" class="form-control" id="pay-system"
+            name="donation" #donation="ngModel" >
+
+            <div *ngIf="donation.invalid && (donation.dirty || donation.touched)" class="alert alert-danger">
+              <div *ngIf="donation.errors.pattern">
+                there should be only digits
+              </div>
+            </div>
+          </div>
+
+        </form>
+
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <button type="button" (click)="donate()" class="btn btn-primary">Donate</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<br>
+<br>
+<button (click)="downloadComments()" [routerLink]="routerLinkVariable" class="btn btn-secondary btn-block">Download Comments</button>
+<router-outlet></router-outlet>
+<br>
+<br>

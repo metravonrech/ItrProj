@@ -1,0 +1,11 @@
+
+<div class="justify-content-center text-center">
+<ngb-rating  class="justify-content-center text-center" [(rate)]="currentRate" (click)="rate($event)" [readonly]="changable" >
+  <ng-template let-fill="fill" let-index="index" >
+    <span class="star" [class.filled]="fill === 100" >&#9733;</span>
+  </ng-template>
+</ngb-rating>
+<pre text>Rate: <b>{{currentRate}}</b></pre>
+</div>
+
+

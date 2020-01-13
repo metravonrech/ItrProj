@@ -1,0 +1,16 @@
+<div class="row pt-5">
+  <div class="col-md-6 mx-auto">
+    <div class="card p-5 border-secondary">
+      <router-outlet></router-outlet>
+      <br>
+      <div class="row">
+        <div class="col-md-6">
+          <button (click)="signInWithFB()" class="p btn btn-success float-right">Continue with Facebook</button>
+        </div>
+        <div class="col-md-6 ">  
+          <button (click)="signInWithGoogle()" class="btn btn-success float-left ">Continue with Google</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

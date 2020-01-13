@@ -1,0 +1,34 @@
+
+    <h2 class="d-flex justify-content-center">Sign In</h2>
+    <form #signInForm="ngForm" (ngSubmit)="signInForm.valid && onSubmit(signInForm)">
+    
+      <div class="form-group">
+        <h5 class="d-flex justify-content-center text-muted">Email</h5>
+        <input type="email" class="form-control form-control-lg" #email="ngModel" name="email"
+        [(ngModel)]="model.email" [pattern]="emailRegex" required>
+        <div *ngIf="signInForm.submitted && email.errors">
+            <div *ngIf="email.errors.required" class="alert alert-danger">This field is required.</div>
+            <div *ngIf="email.errors.pattern" class="alert alert-danger">Invalid email address.</div>
+        </div>
+      </div>
+    
+      <div class="form-group">
+        <h5 class="d-flex justify-content-center text-muted">Password</h5>
+        <input type="password" class="form-control form-control-lg" #password="ngModel" name="password"
+        [(ngModel)]="model.password" minlength="4" required >
+        <div *ngIf="signInForm.submitted && password.errors">
+            <div *ngIf="password.errors.required" class="alert alert-danger">This field is required.</div>
+            <div *ngIf="password.errors.minlength" class="alert alert-danger">Password must be at least 4 characters</div>
+        </div>
+      </div>
+
+      <button class="float-right" type="submit" class="btn-lg btn-primary float-right">Sign In</button>
+    </form>
+    <br>
+    <br>
+    <br>
+    <div class="alert alert-danger" *ngIf="serverErrorMessages">
+            {{serverErrorMessages}}
+    </div>
+
+    

@@ -1,0 +1,17 @@
+<h2 class="text-center">All Companies</h2>
+<div class="row d-flex justify-content-center">
+  <div *ngFor="let company of companies; let i = index">
+
+    <div id="card" class="card m-4">
+      <div class="card-header card-size">
+        <h5 class="text-center">{{company.name}}</h5>
+      </div>
+
+      <cl-image public-id={{company.files[0]}}>
+        <cl-transformation height="265" width="478" crop="fill" ></cl-transformation>
+      </cl-image>
+      <p class="box">{{company.description}}</p>
+      <a [routerLink]="['/company', company._id]" class="btn btn-info ">Learn more</a>
+    </div>
+  </div>
+</div>

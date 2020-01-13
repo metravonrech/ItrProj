@@ -1,0 +1,46 @@
+<div class="container">
+<h2 class="d-flex justify-content-center">Sign Up</h2>
+<form #signUpForm="ngForm" (ngSubmit)="signUpForm.valid && onSubmit(signUpForm)">
+  <div class="form-group">
+    <h5 class="d-flex justify-content-center text-muted">Name</h5>
+    <input type="text" class="form-control form-control-lg" #userName="ngModel" name="userName"
+    [(ngModel)]="userService.selectedUser.userName" required>
+    <div *ngIf="signUpForm.submitted && !userName.valid">
+        <div class="alert alert-danger">This field is required.</div>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <h5 class="d-flex justify-content-center text-muted">Email</h5>
+    <input type="email" class="form-control form-control-lg" #email="ngModel" name="email"
+    [(ngModel)]="userService.selectedUser.email" [pattern]="emailRegex" required>
+    <div *ngIf="signUpForm.submitted && email.errors">
+        <div *ngIf="email.errors.required" class="alert alert-danger">This field is required.</div>
+        <div *ngIf="email.errors.pattern" class="alert alert-danger">Invalid email address.</div>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <h5 class="d-flex justify-content-center text-muted">Password</h5>
+    <input type="password" class="form-control form-control-lg" #password="ngModel" name="password"
+    [(ngModel)]="userService.selectedUser.password" minlength="4" required >
+    <div *ngIf="signUpForm.submitted && password.errors">
+        <div *ngIf="password.errors.required" class="alert alert-danger">This field is required.</div>
+        <div *ngIf="password.errors.minlength" class="alert alert-danger">Password must be at least 4 characters</div>
+    </div>
+
+  </div>
+  <button class="float-right" type="submit" class="btn-lg btn-primary float-right">Sign Up</button>
+</form>
+<br>
+<br>
+<br>
+<div class="alert alert-success" *ngIf="showSucessMessage">
+        Saved succefully
+</div>
+<div class="alert alert-danger" *ngIf="serverErrorMessages">
+        {{serverErrorMessages}}
+</div>
+</div>
+
+

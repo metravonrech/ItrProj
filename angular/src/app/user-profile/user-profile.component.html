@@ -1,0 +1,21 @@
+<div class="alert alert-success" *ngIf="compService.resMessage">
+  Saved succefully
+</div>
+<br>
+<div class="container">
+  <div class="row">
+    <div class="col-9 ">
+      <h4 class="text-center">Your croudfunding companies</h4>
+      <button class="btn btn-block btn-outline-dark mt-3" routerLink="/userprofile/company-creator">Create a new company</button>
+      <br>
+      <div class="pd-3" *ngFor="let company of companiesData">
+      <p class="btn btn-outline-success btn-block" [routerLink]="['/company', company._id]">{{company.name}}</p>
+      </div>
+    </div>
+
+    <div class="col-2 ">
+
+      <h4 class="">Your bonuses</h4>
+    </div>
+  </div>
+</div>

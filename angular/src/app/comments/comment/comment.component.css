@@ -1,0 +1,5 @@
+.comment-width{
+    min-width: 700px;
+    max-width: 700px;
+    word-wrap: break-word;
+}
