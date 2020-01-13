@@ -6,7 +6,6 @@ const googleTokenStrategy = require('passport-google-token').Strategy;
 
 let User = mongoose.model('User');
 
-//facebook strategy
 passport.use('facebook-token', new facebookTokenStrategy({
     clientID: '417240015664074',
     clientSecret: 'd46f0675d8733978faca0f7565f11e8a'
@@ -37,9 +36,6 @@ passport.use('google-token', new googleTokenStrategy({
     }
 }));
 
-
-
-//local strategy
 passport.use(new localStrategy({ usernameField: 'email' }, (username, password, done) => {
             User.findOne({ 'local.email': username },
                 (err, user) => {
